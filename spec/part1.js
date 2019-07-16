@@ -149,6 +149,7 @@
         var letters = ['a', 'b', 'c'];
         letters.someProperty = 'Do not iterate over me!';
 
+
         _.each(letters, function(letter, index, collection) {
           iterations.push(letter);
         });
@@ -229,13 +230,13 @@
       });
 
       it('returns -1 when the target cannot be found not in the list', function() {
-        var numbers = [1,2,3,4];
+        var numbers = [1,2,3,4,5];
 
         expect(_.indexOf(numbers, 35)).to.equal(-1);
       });
 
       it('returns the first index that the target can be found at when there are multiple matches', function() {
-        var numbers = [1,2,3,2,4,5];
+        var numbers = [1,2,3,2,5];
         expect(_.indexOf(numbers, 2)).to.equal(1);
       });
     });
@@ -251,7 +252,7 @@
 
       it('should return all odd numbers in an array', function() {
         var isOdd = function(num) { return num % 2 !== 0; };
-        var odds = FILL_ME_IN;
+        var odds = _.filter([1,2,3,4,5], isOdd);
 
         expect(odds).to.eql([1, 3, 5]);
       });
@@ -332,7 +333,7 @@
         var iterator = function(value) { return value === 1; };
         var numbers = [1, 2, 2, 3, 4, 4];
 
-        expect(_.uniq(FILL_ME_IN)).to.eql([1, 2]);
+        expect(_.uniq(numbers, true, iterator)).to.eql([1, 2]);
       });
 
       it('should produce a brand new array instead of modifying the input array', function() {

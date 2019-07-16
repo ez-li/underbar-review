@@ -78,22 +78,58 @@
         result = index;
       }
     });
-
     return result;
   };
 
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, test) {
+    //Need to access each collection index and pass it into test as the argument
+    //to test if it passes the truth test
+    //If ALL index elements pass, then return true
+    var result = [];
+    _.each(collection, function(value) {
+      if (test(value) === true) {
+        result.push(value);
+      }
+    });
+    return result;
   };
 
   // Return all elements of an array that don't pass a truth test.
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
+    // Pass in collection into _.filter
+    // Need to write the test function for filter
+    var result = _.filter(collection, function(value) {
+      if (test(value) === false) {
+        return true;
+      }
+    });
+    return result;
   };
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array, isSorted, iterator) {
+    var resultArray = [];
+    if (isSorted !== 'undefined' && isSorted) {
+        resultArray.push(array[0]);
+        for (var z = 1; z < array.length; z++) {
+          if (iterator(resultArray[z - 1])) {
+            resultArray.push(array[z]);
+          }
+        }
+    } else {
+      resultArray.push(array[0]);
+      for (var i = 1; i < array.length; i++) {
+        //Since we are not at the beginning, check if resultArray contains current element
+        if (!resultArray.includes(array[i])) {
+          resultArray.push(array[i]);
+        }
+      }
+    }
+    console.log(array, resultArray);
+    return resultArray;
   };
 
 
